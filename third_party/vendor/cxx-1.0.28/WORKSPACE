@@ -1,0 +1,41 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("//tools/bazel:vendor.bzl", "vendor")
+
+http_archive(
+    name = "rules_rust",
+    sha256 = "9207ddfcb58a15ec632fcf6a87c10c4634bd8bcbfeb2dde3652a7d23908e114d",
+    strip_prefix = "rules_rust-1fe23158e5316c17b2ee2a252ee7165c5d83cc93",
+    urls = [
+        # Master branch as of 2019-10-07
+        "https://github.com/bazelbuild/rules_rust/archive/1fe23158e5316c17b2ee2a252ee7165c5d83cc93.tar.gz",
+    ],
+)
+
+http_archive(
+    name = "bazel_skylib",
+    sha256 = "97e70364e9249702246c0e9444bccdc4b847bed1eb03c5a3ece4f83dfe6abc44",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
+        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
+    ],
+)
+
+
+load("@rules_rust//rust:repositories.bzl", "rust_repository_set")
+
+rust_repository_set(
+    name = "rust_1_48_linux",
+    exec_triple = "x86_64-unknown-linux-gnu",
+    version = "1.48.0",
+)
+
+rust_repository_set(
+    name = "rust_1_48_darwin",
+    exec_triple = "x86_64-apple-darwin",
+    version = "1.48.0",
+)
+
+vendor(
+    name = "third-party",
+    lockfile = "//third-party:Cargo.lock",
+)

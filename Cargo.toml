@@ -1,0 +1,34 @@
+[package]
+name = "rust-interop-playground"
+version = "0.1.0"
+authors = ["Rosica Dejanovska <rosica@google.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cxx="1.0"
+
+# Above this line should be the contents of your Cargo.toml file
+
+[package.metadata.raze]
+# The path at which to write output files.
+#
+# `cargo raze` will generate Bazel-compatible BUILD files into this path.
+# This can either be a relative path (e.g. "foo/bar"), relative to this
+# Cargo.toml file; or relative to the Bazel workspace root (e.g. "//foo/bar").
+workspace_path = "//third_party"
+
+# This causes aliases for dependencies to be rendered in the BUILD
+# file located next to this `Cargo.toml` file.
+package_aliases_dir = "./third_party"
+
+# The set of targets to generate BUILD rules for.
+targets = [
+    "x86_64-unknown-linux-gnu",
+]
+
+# The two acceptable options are "Remote" and "Vendored" which
+# is used to indicate whether the user is using a non-vendored or
+# vendored set of dependencies.
+genmode = "Vendored"
