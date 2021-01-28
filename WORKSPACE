@@ -23,3 +23,8 @@ http_archive(
 
 load("@rules_rust//rust:repositories.bzl", "rust_repositories")
 rust_repositories()
+
+local_repository(
+    name = "cxx",
+    path = "third_party/vendor/cxx-1.0.28"
+)
