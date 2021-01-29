@@ -1,10 +1,10 @@
 load("@rules_rust//rust:rust.bzl", "rust_binary")
 load("@cxx//tools/bazel:rust_cxx_bridge.bzl", "rust_cxx_bridge")
-load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
 
 rust_cxx_bridge(
     name = "bridge",
-    src = "main.rs",
+    src = "ffi.rs",
     deps = [":lib"],
 )
 
@@ -16,7 +16,7 @@ cc_library(
 
 rust_binary(
     name = "cxxtest",
-    srcs = ["main.rs"],
+    srcs = ["main.rs", "ffi.rs"],
     deps = [
         ":bridge",
         "@cxx//:cxx",
