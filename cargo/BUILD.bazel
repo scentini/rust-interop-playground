@@ -10,3 +10,13 @@ package(default_visibility = ["//visibility:public"])
 licenses([
     "notice",  # See individual crates for specific licenses
 ])
+
+# Aliased targets
+alias(
+    name = "cxx",
+    actual = "//third_party/vendor/cxx-1.0.29:cxx",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)

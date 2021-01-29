@@ -11,14 +11,9 @@ http_archive(
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
 
-http_archive(
+local_repository(
     name = "rules_rust",
-    sha256 = "9207ddfcb58a15ec632fcf6a87c10c4634bd8bcbfeb2dde3652a7d23908e114d",
-    strip_prefix = "rules_rust-1fe23158e5316c17b2ee2a252ee7165c5d83cc93",
-    urls = [
-        # Master branch as of 2019-10-07
-        "https://github.com/bazelbuild/rules_rust/archive/1fe23158e5316c17b2ee2a252ee7165c5d83cc93.tar.gz",
-    ],
+    path = "../rules_rust"
 )
 
 load("@rules_rust//rust:repositories.bzl", "rust_repositories")
@@ -26,5 +21,12 @@ rust_repositories()
 
 local_repository(
     name = "cxx",
-    path = "third_party/vendor/cxx-1.0.28"
+    path = "../cxx"
+)
+
+load("@cxx//tools/bazel:vendor.bzl", "vendor")
+
+vendor(
+    name = "third-party",
+    lockfile = "@cxx//third-party:Cargo.lock",
 )
