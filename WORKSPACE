@@ -20,13 +20,13 @@ load("@rules_rust//rust:repositories.bzl", "rust_repositories")
 rust_repositories()
 
 local_repository(
-    name = "cxx",
+    name = "cxx.rs",
     path = "../cxx"
 )
 
-load("@cxx//tools/bazel:vendor.bzl", "vendor")
+load("@cxx.rs//tools/bazel:vendor.bzl", "vendor")
 
 vendor(
     name = "third-party",
-    lockfile = "@cxx//third-party:Cargo.lock",
+    lockfile = "@cxx.rs//third-party:Cargo.lock",
 )
