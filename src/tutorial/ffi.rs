@@ -1,14 +1,14 @@
-// use rusttest::rusttest;
+extern crate rusttest;
+use rusttest::rusttest;
 
 #[cxx::bridge]
 pub mod gen {
-
     unsafe extern "C++" {
-        include!("src/tutorial/cxxtest.h");
+        include!("cxxtest.h");
         fn cxxtest();
     }
 
-    // extern "Rust" {
-    //     fn rusttest();
-    // }
+    extern "Rust" {
+        fn rusttest();
+    }
 }
